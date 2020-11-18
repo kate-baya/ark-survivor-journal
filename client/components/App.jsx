@@ -4,8 +4,9 @@ import {HashRouter as Router, Route, Link} from 'react-router-dom'
 import Home from './Home'
 import Nav from './Nav'
 import TamedDinos from "./TamedDinos"
-import Recipies from './Recipes'
+import Recipes from './Recipes'
 import Crafting from './Crafting'
+import Inventory from './Inventory'
 
 const App = () => {
   return (
@@ -14,8 +15,9 @@ const App = () => {
     <Nav />
     <Route path ="/" exact={true} component={Home} />
     <Route path="/tamedDinos" component={TamedDinos}/>
-    <Route path='/recipies' component={Recipies} />
+    <Route path='/recipes' component={Recipes} />
     <Route path='/crafting' component={Crafting} />
+    <Route path='/inventory' component={Inventory} />
     {/* <h1>Ark Survival Journal</h1>
     <div Nav>
     <p>Tamed Dinos</p>
