@@ -11,7 +11,7 @@ import Inventory from './Inventory'
 const App = () => {
   return (
     <Router>
-    <>
+    <div className="app">
     <Nav />
     <Route path ="/" exact={true} component={Home} />
     <Route path="/tamedDinos" component={TamedDinos}/>
@@ -44,7 +44,7 @@ const App = () => {
       <p>Future Raids</p>
       <p>Raided By (Enemy Intel)</p>
     </div> */}
-    </>
+    </div>
     </Router>
   )
 }

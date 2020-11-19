@@ -29,13 +29,14 @@ export default class Inventory extends React.Component {
  
     render () {
         return (
-            <div>
-                <h1>Tribe Inventory</h1>
+            <div className="container spacing">
+                <h1>Tribe Inventory 🎒</h1>
                 <Link to="inventory/addInventory"><p>Add Inventory</p></Link>
                 <Route path='inventory/addInventory'>
                     <AddInventory reloadInventory={this.reloadInventory}/>
                 </Route>
-                <ul>
+                <h5>Stock List</h5>
+                <ul className="list">
                 {this.state.inventory.map((inventory, id) => {
                     return <li key={id}>{inventory.item} {inventory.amount}</li>
                 })}

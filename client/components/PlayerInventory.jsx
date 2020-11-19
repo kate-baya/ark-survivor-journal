@@ -16,7 +16,6 @@ export default class PlayerInventory extends React.Component {
         getInventory()
             .then(items => {
                 this.setState({inventory: items})
-                console.log(items)
             })
             .catch(err => {
                 res.status(500).send(err.message)
@@ -30,7 +29,7 @@ export default class PlayerInventory extends React.Component {
         render () {
         return (
             <div>
-                <ul>
+                <ul className="list">
                     {this.recipe && this.state.inventory.map((item, id) => {
                         return <li key={id}>{item.item} {item.amount}</li>
                     })}

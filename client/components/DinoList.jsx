@@ -1,7 +1,7 @@
 import React from 'react'
 import dinos from '../data/dinos'
 import secondDino from '../data/dinos'
-import {Link} from 'react-router-dom'
+import {Link, Route} from 'react-router-dom'
 import { getDinos } from '../api'
 
 export default class DinoList extends React.Component {
@@ -26,13 +26,16 @@ export default class DinoList extends React.Component {
 
     render () {
         return (
-            <ul>
+            <ul className='list'>
             {this.state.dinos.map((dino, id) => {
                 return <li key={id}>
                     <Link to={`/tamedDinos/${dino.id}`}>{dino.name} ({dino.level})</Link>
-                    {secondDino.map((dino2, id) => {
-                        return <Link key={id} to={`/tamedDinos/${dino.id}/${dino2.id}`}><p>Compare</p></Link>
-                    })}
+                    <Route path={`/tamedDinos/:id`} render={({match}) => {
+                        const comparingToOther = match.params.id != dino.id
+                        return <div>
+                        {comparingToOther && <Link key={id} to={`/tamedDinos/${match.params.id}/${dino.id}`}><p>Compare</p></Link>}
+                        </div> 
+                        }}/>
                     </li>
             })}
             </ul>

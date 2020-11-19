@@ -8,7 +8,7 @@ export default function CraftingIngredients (props) {
 
     return (
         <div>
-            <ul>
+            <ul className="list">
             {item.ingredients.map((ingredients, id) => {
                 return <li key={id}>{ingredients.resource} {ingredients.amount}</li>
             })}

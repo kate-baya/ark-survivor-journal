@@ -1,6 +1,6 @@
 const recipes = [
     {
-        id: 0,
+        id: 1,
         name: 'Medical Brew',
         ingredients: [
             {
@@ -18,7 +18,7 @@ const recipes = [
         ]
     },
     {
-        id: 1,
+        id: 2,
         name: 'Energy Brew',
         ingredients: [
             {

@@ -21,7 +21,7 @@ const dinos = [
     {
         id: 1,
         type: 'Rex',
-        name: 'Miss Weach',
+        name: 'uwu',
         level: 155,
         sex: 'Female',
         stats: [
