@@ -1,17 +1,11 @@
 import React from 'react'
 import {Link, Route} from 'react-router-dom'
-// import playerInventory from '../data/playerInventory'
-import {getInventory} from '../api'
+import {getInventory} from '../apis/inventoryApi'
+import { connect } from 'react-redux'
+import { receiveInventory } from '../actions/index'
 import AddInventory from './AddInventory'
 
-export default class Inventory extends React.Component {
-    
-    constructor(props) {
-        super(props)
-        this.state = {
-            inventory: []
-        }
-    }   
+class Inventory extends React.Component { 
 
     componentDidMount () {
         this.reloadInventory()
@@ -19,24 +13,25 @@ export default class Inventory extends React.Component {
 
     reloadInventory = () => {
         getInventory()
-        .then(items => {
-            this.setState({inventory: items})
+        .then(inv => {
+            this.props.dispatch(receiveInventory(inv))
         })
         .catch(err => {
-            res.status(500).send(err.message)
+            console.log(err)
         })
     }
  
     render () {
         return (
-            <div>
-                <h1>Tribe Inventory</h1>
+            <div className="container spacing">
+                <h1>Tribe Inventory 🎒</h1>
                 <Link to="inventory/addInventory"><p>Add Inventory</p></Link>
                 <Route path='inventory/addInventory'>
                     <AddInventory reloadInventory={this.reloadInventory}/>
                 </Route>
-                <ul>
-                {this.state.inventory.map((inventory, id) => {
+                <h5>Stock List</h5>
+                <ul className="list">
+                {this.props.inventory.map((inventory, id) => {
                     return <li key={id}>{inventory.item} {inventory.amount}</li>
                 })}
                 </ul>
@@ -44,3 +39,11 @@ export default class Inventory extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        inventory: state.inventory
+    }
+}
+
+export default connect(mapStateToProps)(Inventory)

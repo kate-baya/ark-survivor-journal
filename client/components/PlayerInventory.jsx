@@ -1,22 +1,15 @@
 import React from 'react'
-// import playerInventory from '../data/playerInventory'
 import recipes from '../data/recipes'
-import {getInventory} from '../api'
+import {getInventory} from '../apis/inventoryApi'
+import {receiveInventory} from '../actions/index'
+import {connect} from 'react-redux'
 
-export default class PlayerInventory extends React.Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            inventory: []
-        }
-    }
+class PlayerInventory extends React.Component {
 
     componentDidMount () {
         getInventory()
-            .then(items => {
-                this.setState({inventory: items})
-                console.log(items)
+            .then(inv => {
+                this.props.dispatch(receiveInventory(inv))
             })
             .catch(err => {
                 res.status(500).send(err.message)
@@ -30,8 +23,8 @@ export default class PlayerInventory extends React.Component {
         render () {
         return (
             <div>
-                <ul>
-                    {this.recipe && this.state.inventory.map((item, id) => {
+                <ul className="list">
+                    {this.recipe && this.props.inventory.map((item, id) => {
                         return <li key={id}>{item.item} {item.amount}</li>
                     })}
                 </ul>
@@ -40,3 +33,11 @@ export default class PlayerInventory extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        inventory: state.inventory
+    }
+}
+
+export default connect(mapStateToProps)(PlayerInventory)

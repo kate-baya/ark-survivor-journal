@@ -10,19 +10,26 @@ function getDinos () {
     return db('dinos').select()
 }
 
-// function getRecipes() {
-//     return db('recipes')
-//         .select(//stuff)
-//         .join??
-// }
+function getRecipes() {
+    return db('recipes').select()
+}
 
-// function getCrafting() {
-//     return db('crafting')
-//         .select(//stuff)
-//         .join??
-// }
+function getCrafting() {
+    return db('crafting').select()
+}
+
+function getCraftingIngredients() {
+    return db('crafting')
+    .join('craftingIngredients', 'ingredients', 'ingredients.id', 'crafting.id', 'craftingIngredients.crafting_id')
+    .select('ingredients.name', 'craftingIngredients.amount', 'crafting.name')
+    .where('crafting.id', id)
+    .first()
+}
 
 module.exports= {
     getInventory,
-    getDinos
+    getDinos,
+    getRecipes,
+    getCrafting,
+    getCraftingIngredients
 }

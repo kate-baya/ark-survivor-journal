@@ -137,8 +137,8 @@ h1 { font-size: 4.0rem; line-height: 1.2;  letter-spacing: -.1rem;}
 h2 { font-size: 3.6rem; line-height: 1.25; letter-spacing: -.1rem; }
 h3 { font-size: 3.0rem; line-height: 1.3;  letter-spacing: -.1rem; }
 h4 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -.08rem; }
-h5 { font-size: 1.8rem; line-height: 1.5;  letter-spacing: -.05rem; }
-h6 { font-size: 1.5rem; line-height: 1.6;  letter-spacing: 0; }
+h5 { font-size: 1.8rem; line-height: 1.5;  letter-spacing: -.05rem; border-bottom: solid; border-width: thin}
+h6 { font-size: 1.5rem; line-height: 1.6;  letter-spacing: 0;}
 
 /* Larger than phablet */
 @media (min-width: 550px) {
@@ -422,13 +422,64 @@ there.
   border-width: .1cm;
 }
 
+.boxpad {
+  padding: 2.45%
+}
+
 .flex {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .home {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-top: 40px;
+  margin-left: 40px
+}
+
+.nav {
+  border-bottom: solid;
+  border-width: thin;
+  border-color: grey;
+  padding-bottom: 15px;
+  padding-top: 10px;
+  padding-left: 60px;
+}
+
+.title {
+  font-size:85px;
+  margin-top: 10px;
+  padding-left: 35px;
+  border-bottom: solid;
+  border-width: thin
+}
+
+.chosenTame{
+  font-size: 20px;
+  text-align: right;
+}
+
+.toCompare{
+  font-size: 20px;
+  text-align: left;
+}
+
+.bigger{
+  font-size: 30px
+}
+
+.list{
+  font-size: 16px
+}
+
+.spacing {
+  margin-top: 18px;
+  padding-left: 10px;
+  padding-right: 10px
+}
+
+.app {
+  /* lol */
 }

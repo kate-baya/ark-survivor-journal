@@ -7,8 +7,8 @@ function ChosenDino (props) {
     })
 
     return (
-        <div>
-            <h5>{dino.name}</h5>
+        <div className='chosenTame'>
+            <h6 className='bigger'>Name: {dino.name}</h6>
             <p>Level: {dino.level}</p>
             <p>Type: {dino.type}</p>
             <p>Sex: {dino.sex}</p>
