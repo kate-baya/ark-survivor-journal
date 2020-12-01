@@ -1,13 +1,24 @@
 import React from 'react'
+import {connect} from 'react-redux'
+import {saveInventory} from '../apis/inventoryApi'
 
-export default class addDino extends React.Component {
-
-    handleChange(event) {
-        this.setState({})
+class AddInventory extends React.Component {
+    state = {
+        item: '',
+        amount: 0
     }
 
-    handleSubmit (event) {
-        this.reloadInventory()
+    handleChange = (e) => {
+        const {name, value} = e.target
+        return this.setState({
+            [name]: value
+        })
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault()
+        const { item, amount} = this.state
+        saveInventory(this.state, this.props.dispatch)
     }
 
     render() {
@@ -16,11 +27,11 @@ export default class addDino extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Item:
-                    <input type="text" name="item" value={this.state.inventory.item} onChange={this.handleChange}/>
+                    <input type="text" name="item" value={this.state.item} onChange={this.handleChange}/>
                     </label>
                     <label>
                         Amount:
-                    <input type="text" name="amount" value={this.state.inventory.amount} onChange={this.handleChange} />
+                    <input type="text" name="amount" value={this.state.amount} onChange={this.handleChange} />
                     </label>
                     <input type ="submit" value="Submit"></input>
                 </form>
@@ -29,5 +40,4 @@ export default class addDino extends React.Component {
     }
 }
 
-//on handle submit I post data to the api
-//api is post (to save the data)
+export default connect()(AddInventory)

@@ -8,26 +8,16 @@ import AddInventory from './AddInventory'
 class Inventory extends React.Component { 
 
     componentDidMount () {
-        this.reloadInventory()
+        this.props.reloadInventory()
     }
 
-    reloadInventory = () => {
-        getInventory()
-        .then(inv => {
-            this.props.dispatch(receiveInventory(inv))
-        })
-        .catch(err => {
-            console.log(err)
-        })
-    }
- 
     render () {
         return (
             <div className="container spacing">
                 <h1>Tribe Inventory 🎒</h1>
                 <Link to="inventory/addInventory"><p>Add Inventory</p></Link>
-                <Route path='inventory/addInventory'>
-                    <AddInventory reloadInventory={this.reloadInventory}/>
+                <Route path='/inventory/addInventory'>
+                    <AddInventory reloadInventory={this.props.reloadInventory}/>
                 </Route>
                 <h5>Stock List</h5>
                 <ul className="list">

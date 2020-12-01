@@ -6,6 +6,21 @@ function getInventory (db = connection) {
     return db('inventory').select()
 }
 
+function findInventory (id, db = connection) {
+    return db('inventory')
+    .where('id', id)
+    .select()
+    .first()
+}
+
+function addInventory (inventory, db = connection) {
+    return db('inventory')
+    .insert(inventory)
+    .then(id => {
+        return findInventory(id[0], db)
+    })
+}
+
 function getDinos (db = connection) {
     return db('dinos').select()
 }
@@ -46,5 +61,6 @@ module.exports= {
     getRecipes,
     getCrafting,
     getCraftingIngredients, 
-    addTame
+    addTame, 
+    addInventory
 }
