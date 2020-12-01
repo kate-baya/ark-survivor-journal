@@ -1,24 +1,36 @@
 import React from 'react'
-import dinos from '../data/dinos'
+import {connect} from 'react-redux'
 
-function ChosenDino (props) {
-    const dino = dinos.find(dino => {
-        return dino.id == props.match.params.id
-    })
+class ChosenDino extends React.Component {
 
-    return (
-        <div className='chosenTame'>
-            <h6 className='bigger'>Name: {dino.name}</h6>
-            <p>Level: {dino.level}</p>
-            <p>Type: {dino.type}</p>
-            <p>Sex: {dino.sex}</p>
-            <div>
-                {dino.stats.map((stat, key) => {
-                    return <p key={key}>{stat.statType}: {stat.points}</p>
-                })}
+    findDino () { 
+        return this.props.dinos.find(dino => {
+        return dino.id == this.props.match.params.id
+        })
+    }
+
+    render () {
+        const dino = this.findDino()
+        return (
+            <div className='chosenTame'>
+                <h6 className='bigger'>Name: {dino.name}</h6>
+                <p>Level: {dino.level}</p>
+                <p>Type: {dino.type}</p>
+                <p>Sex: {dino.sex}</p>
+                <p>Health: {dino.health}</p>
+                <p>Stamina: {dino.stamina}</p>
+                <p>Food: {dino.food}</p>
+                <p>Weight: {dino.weight}</p>
+                <p>Melee Damage: {dino.melee_damage}</p>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
-export default ChosenDino
+const mapStateToProps = (state) => {
+    return {
+        dinos: state.dinos
+    }
+}
+
+export default connect(mapStateToProps)(ChosenDino)

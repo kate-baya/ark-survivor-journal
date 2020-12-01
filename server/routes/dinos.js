@@ -15,4 +15,16 @@ router.get('/dinos', getTokenDecoder(), async (req, res) => {
     }
 })
 
+router.post('/dinos', getTokenDecoder(), async (req, res) => {
+    try {
+        const tame = req.body
+        db.addTame(tame)
+        .then(tame => {
+            res.status(201).json(tame)
+        })
+    } catch(err) {
+        res.status(500).send(err.message)
+    }
+})
+
 module.exports = router

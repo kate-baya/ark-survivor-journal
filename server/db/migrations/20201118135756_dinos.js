@@ -6,7 +6,11 @@ exports.up = function(knex) {
       table.string('name')
       table.integer('level')
       table.string('sex')
-      table.integer('stat_id')
+      table.integer('health')
+      table.integer('stamina')
+      table.integer('food')
+      table.integer('weight')
+      table.integer('melee_damage')
   })
 };
 

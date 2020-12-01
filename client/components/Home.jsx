@@ -20,6 +20,7 @@ export default class Home extends React.Component {
    }
 
    handleSubmit = e => {
+       e.preventDefault()
     const { username, password } = this.state
        return signIn({ username, password})
         .then((token) => {

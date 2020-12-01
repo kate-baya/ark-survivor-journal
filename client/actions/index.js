@@ -2,6 +2,7 @@ export const RECEIVE_DINOS = 'RECEIVE_DINOS'
 export const RECEIVE_INVENTORY = 'RECEIVE_INVENTORY'
 export const RECEIVE_CRAFTING = 'RECEIVE_CRAFTING'
 export const RECEIVE_RECIPES = 'RECEIVE_RECIPES'
+export const ADD_TAME = 'ADD_TAME'
 
 export const receiveDinos = (dinos) => {
     return {
@@ -28,5 +29,12 @@ export const receiveRecipes = (recipes) => {
     return {
         type: RECEIVE_RECIPES,
         recipes: recipes
+    }
+}
+
+export const addTame = (tame) => {
+    return {
+        type: ADD_TAME,
+        tame
     }
 }

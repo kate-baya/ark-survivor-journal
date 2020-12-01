@@ -1,5 +1,8 @@
 import React from 'react'
 import {HashRouter as Router, Route, Link} from 'react-router-dom'
+import {getDinos} from '../apis/dinoApi'
+import {receiveDinos} from '../actions/index'
+import {connect} from 'react-redux'
 
 import Home from './Home'
 import Nav from './Nav'
@@ -8,8 +11,20 @@ import Recipes from './Recipes'
 import Crafting from './Crafting'
 import Inventory from './Inventory'
 import Register from './Register'
+import AddTame from './AddTame'
 
-export default class App extends React.Component {
+class App extends React.Component {
+
+  componentDidMount () {
+    getDinos()
+        .then(dinos => {
+            this.props.dispatch(receiveDinos(dinos))
+        })
+        .catch(err => {
+            console.log(err)
+        })
+  }
+
   render () {
     return (
       <Router>
@@ -21,6 +36,7 @@ export default class App extends React.Component {
       <Route path='/recipes' component={Recipes} />
       <Route path='/crafting' component={Crafting} />
       <Route path='/inventory' component={Inventory} />
+      <Route path="/addTame" component={AddTame} />
       {/* <h1>Ark Survival Journal</h1>
       <div Nav>
       <p>Tamed Dinos</p>
@@ -53,3 +69,4 @@ export default class App extends React.Component {
   }
 }
 
+export default connect()(App)

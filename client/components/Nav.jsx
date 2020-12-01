@@ -5,6 +5,10 @@ import { logOff } from 'authenticare/client'
 
 export default class Nav extends React.Component {
     render () {
+        const handleClick = (e) => {
+            logOff()
+            document.location.reload()
+        }
         return (
                 <div className="container flex nav">
                     <IfNotAuthenticated>
@@ -12,7 +16,7 @@ export default class Nav extends React.Component {
                         <Link to="/register">Register</Link>
                     </IfNotAuthenticated>
                     <IfAuthenticated>
-                        <Link to="/" onClick={logOff}>Log Off</Link>
+                        <Link to="/" onClick={handleClick}>Log Off</Link>
                         <Link to="/tamedDinos">Tames</Link>
                         <Link to='/inventory'>Inventory</Link>
                         <Link to="/recipes">Recipes</Link>

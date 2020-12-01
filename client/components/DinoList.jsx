@@ -6,15 +6,7 @@ import { connect } from 'react-redux'
 
 class DinoList extends React.Component {
 
-    componentDidMount () {
-        getDinos()
-            .then(dinos => {
-                this.props.dispatch(receiveDinos(dinos))
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }
+
 
     render () {
         return (
