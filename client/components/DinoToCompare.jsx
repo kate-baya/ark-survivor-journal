@@ -5,7 +5,6 @@ function DinoToCompare (props) {
     const dino = secondDino.find(dino => {
         return dino.id == props.match.params.id2
     })
-    console.log(props)
     return (
         <div className='toCompare'>
             <h6 className='bigger'>Name: {dino.name}</h6>

@@ -1,27 +1,20 @@
 import React from 'react'
 import {Route, Link} from 'react-router-dom'
-import recipes from '../data/recipes'
-import {getRecipes} from '../api'
+import {connect} from 'react-redux'
+import {getRecipes} from '../apis/recipesApi'
+import {receiveRecipes} from '../actions/index'
 import Ingredients from './Ingredients'
 import PlayerInventory from './PlayerInventory'
 
-export default class Recipes extends React.Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            recipes: []
-        }
-    }
+class Recipes extends React.Component {
 
     componentDidMount = () => {
-        console.log(getRecipes())
         getRecipes()
-        .then(recipeItems => {
-            this.setState({recipes: recipeItems})
+        .then(recipe => {
+            this.props.dispatch(receiveRecipes(recipe))
         })
         .catch(err => {
-            res.status(500).send(err.message)
+            console.log(err)
         })
     }
 
@@ -33,7 +26,7 @@ export default class Recipes extends React.Component {
                             <div className="one-third column border boxpad">
                                 <h5>Recipes</h5>
                                 <ul className='list'>
-                                    {this.state.recipes.map((recipe) => <li key={recipe.id}><Link to={`/recipes/${recipe.id}`}>{recipe.name}</Link></li>)}
+                                    {this.props.recipes.map((recipe) => <li key={recipe.id}><Link to={`/recipes/${recipe.id}`}>{recipe.name}</Link></li>)}
                                 </ul>
                             </div>
                             <div className="one-third column border boxpad">
@@ -54,3 +47,11 @@ export default class Recipes extends React.Component {
             )
         }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        recipes: state.recipes
+    }
+}
+
+export default connect(mapStateToProps)(Recipes)

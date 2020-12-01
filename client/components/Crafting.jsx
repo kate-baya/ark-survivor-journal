@@ -1,33 +1,25 @@
 import React from 'react'
-import crafting from '../data/crafting'
 import CraftingIngredients from './CraftingIngredients'
 import PlayerInventory from './PlayerInventory'
 import {Link, Route} from 'react-router-dom'
-import {getCrafting} from '../api'
+import {getCrafting} from '../apis/craftingApi'
+import {receiveCrafting} from '../actions/index'
+import { connect } from 'react-redux'
 
-export default class Crafting extends React.Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            crafting: []
-        }
-    }
+class Crafting extends React.Component {
 
     componentDidMount = () => {
         getCrafting()
-        .then(craftingItems => {
-            console.log(craftingItems)
-            this.setState({crafting: craftingItems})
+        .then(item => {
+            this.props.dispatch(receiveCrafting(item))
         })
         .catch(err => {
-            res.status(500).send(err.message)
+            console.log(err)
         })
     }
 
   
     render() {
-        {console.log(this.state)}
         return (
             <div className="container spacing">
                 <h1>Crafting 🪚</h1>
@@ -35,7 +27,7 @@ export default class Crafting extends React.Component {
                         <div className="one-third column border boxpad">
                             <h5>Items to Craft</h5>
                                 <ul className="list">
-                                    {this.state.crafting.map((item, id) => {
+                                    {this.props.crafting.map((item, id) => {
                                         return <li key={id}><Link to={`/crafting/${item.id}`}>{item.name}</Link></li>
                                     })}
                                 </ul>
@@ -58,3 +50,11 @@ export default class Crafting extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        crafting: state.crafting
+    }
+}
+
+export default connect(mapStateToProps)(Crafting)
