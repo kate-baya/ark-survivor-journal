@@ -44,7 +44,7 @@ class AddTame extends React.Component{
             <label>
                 Type:
             <input type="text" name="type" value={this.state.type} onChange={this.handleChange}/>
-            </label>
+            </label>e
             <label>
                 Name:
             <input type="text" name="name" value={this.state.name} onChange={this.handleChange}/>

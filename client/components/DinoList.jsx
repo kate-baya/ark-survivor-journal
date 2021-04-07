@@ -1,12 +1,8 @@
 import React from 'react'
 import {Link, Route} from 'react-router-dom'
-import { getDinos } from '../apis/dinoApi'
-import { receiveDinos } from '../actions/index'
 import { connect } from 'react-redux'
 
 class DinoList extends React.Component {
-
-
 
     render () {
         return (

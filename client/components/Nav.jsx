@@ -10,7 +10,7 @@ export default class Nav extends React.Component {
             document.location.reload()
         }
         return (
-                <div className="container flex nav">
+                <div className="flex">
                     <IfNotAuthenticated>
                         <Link to="/">Sign In</Link>
                         <Link to="/register">Register</Link>

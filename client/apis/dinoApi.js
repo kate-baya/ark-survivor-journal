@@ -1,6 +1,6 @@
 import request from 'superagent'
 import { getAuthorizationHeader } from 'authenticare/client'
-import {addTame} from '../actions/index'
+import {addTame, tameDelete} from '../actions/index'
 
 const apiUrl = 'http://localhost:3000/api/v1'
 
@@ -13,16 +13,24 @@ export function getDinos() {
 }
 
 export function saveTame(tame, dispatch) {
-    console.log(tame)
     return request
         .post(`${apiUrl}/dinos`)
         .set(getAuthorizationHeader())
         .send(tame)
         .then((res) => {
-            console.log(res.body)
             return dispatch(addTame(res.body))
         })
         .catch(logError)
+}
+
+export function deleteTame(id, dispatch) {
+  return request
+    .delete(`${apiUrl}/dinos/${id}`)
+    .set(getAuthorizationHeader())
+    .then(res => {
+      return dispatch(tameDelete(res.body))
+    })
+    .catch(logError)
 }
 
 function logError (err) {

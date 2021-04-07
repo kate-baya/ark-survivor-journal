@@ -12,52 +12,52 @@ export default class Home extends React.Component {
         }
     }
 
-   handleChange = e => {
-       const {name, value } = e.target
-       this.setState({
-           [name]: value
-       })
-   }
-
-   handleSubmit = e => {
-       e.preventDefault()
-    const { username, password } = this.state
-       return signIn({ username, password})
-        .then((token) => {
-            if (isAuthenticated()) {
-                this.props.history.push('/')
-            }
-            return null
+    handleChange = e => {
+        const { name, value } = e.target
+        this.setState({
+            [name]: value
         })
-   }
+    }
 
-    render () {
+    handleSubmit = e => {
+        e.preventDefault()
+        const { username, password } = this.state
+        return signIn({ username, password })
+            .then((token) => {
+                if (isAuthenticated()) {
+                    this.props.history.push('/')
+                }
+                return null
+            })
+    }
+
+    render() {
         return (
             <div className="container">
-                 <h1 className="title">Ark Survival Journal &nbsp; 🦕</h1>
+                <h1 className="title">Ark Survival Journal &nbsp; 🦕</h1>
                 <div className="home">
                     <IfAuthenticated>
-                        <h3>Welcome Back Username!</h3>
-                            <p>This is where I put the tribe log from the mythical api lol</p>
-                      
+                        <h3>Welcome!</h3>
+                        <p>This is where I put the tribe log from the mythical api!</p>
+
                     </IfAuthenticated>
-                    <IfNotAuthenticated>              
-                    <h3>Welcome</h3> 
-                    <p>Please sign in to continue</p>
-                    <form onSubmit={this.handleSubmit}>
-                    <label>
-                       <p>User (or Tribe) Name: </p>
-                    <input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
-                    </label>
-                    <label>
-                       <p>Password:</p> 
-                    <input type="text" name="password" value={this.state.password} onChange={this.handleChange} />
-                    </label>
-                    <input type ="submit" value="Submit"></input>
-                </form>
-                </IfNotAuthenticated>    
+                    <IfNotAuthenticated>
+                        <h3>Welcome</h3>
+                        <p>Please sign in to continue</p>
+                        <form onSubmit={this.handleSubmit}>
+                            <label>
+                                <p>User (or Tribe) Name: </p>
+                                <input type="text" name="username" value={this.state.username} onChange={this.handleChange} />
+                            </label>
+                            <label>
+                                <p>Password:</p>
+                                <input type="text" name="password" value={this.state.password} onChange={this.handleChange} />
+                            </label>
+                            <input type="submit" value="Submit"></input>
+                        </form>
+                    </IfNotAuthenticated>
                 </div>
-            </div>    
+            </div>
         )
     }
 }

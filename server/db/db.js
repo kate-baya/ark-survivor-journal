@@ -24,6 +24,7 @@ function addInventory (inventory, db = connection) {
 function getDinos (db = connection) {
     return db('dinos').select()
 }
+
 function findDino (id, db = connection) {
     return db('dinos')
     .where('id', id)
@@ -37,6 +38,12 @@ function addTame (tame, db = connection) {
     .then(id => {
         return findDino(id[0], db)
     })
+}
+
+function deleteTame (id, db = connection) {
+    return db('dinos')
+    .where('id', id)
+    .delete()
 }
 
 function getRecipes(db = connection) {
@@ -62,5 +69,6 @@ module.exports= {
     getCrafting,
     getCraftingIngredients, 
     addTame, 
-    addInventory
+    addInventory,
+    deleteTame
 }

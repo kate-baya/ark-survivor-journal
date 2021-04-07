@@ -27,4 +27,14 @@ router.post('/dinos', getTokenDecoder(), async (req, res) => {
     }
 })
 
+router.delete(`/dinos/:id`, getTokenDecoder(), async (req, res) => {
+    try {
+        const id = req.params.id
+        db.deleteTame(id)
+        .then(res.status(200))
+    } catch(err) {
+        res.status(500).send(err.message)
+    }
+})
+
 module.exports = router

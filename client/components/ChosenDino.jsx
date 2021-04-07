@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import { deleteTame } from '../apis/dinoApi'
 
 class ChosenDino extends React.Component {
 
@@ -9,8 +10,21 @@ class ChosenDino extends React.Component {
         })
     }
 
+    
+
     render () {
         const dino = this.findDino()
+
+        const clickHandler = (e) => {
+            console.log("line 19")
+            deleteTame(dino.id, this.props.dispatch)
+            console.log(this.props)
+        }
+
+        const update = () => {
+
+        }
+
         return (
             <div className='chosenTame'>
                 <h6 className='bigger'>Name: {dino.name}</h6>
@@ -22,12 +36,15 @@ class ChosenDino extends React.Component {
                 <p>Food: {dino.food}</p>
                 <p>Weight: {dino.weight}</p>
                 <p>Melee Damage: {dino.melee_damage}</p>
+                <button onClick={clickHandler}>Delete</button>
+                <button onClick={this.update}>Update</button>
             </div>
         )
     }
 }
 
 const mapStateToProps = (state) => {
+    console.log(state)
     return {
         dinos: state.dinos
     }
